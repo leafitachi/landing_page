@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OneInsure - Compare Health Insurance Plans</title>
+  <style>
+    /* Reset and base styles */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #121725;
+      background: #fff;
+      line-height: 1.5;
+      font-size: 16px;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    strong {
+      font-weight: 700;
+    }
+    em {
+      font-style: italic;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 20px 16px 40px;
+    }
+
+    /* Logo */
+    header {
+      margin-bottom: 30px;
+    }
+    .logo {
+      font-weight: 700;
+      font-size: 1.7rem;
+      line-height: 1;
+      user-select: none;
+      display: inline-flex;
+      align-items: center;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .logo .one {
+      color: #03a9f4; /* blue */
+      letter-spacing: -0.03em;
+    }
+    .logo .insure {
+      color: #f7931e; /* orange */
+      letter-spacing: -0.03em;
+      margin-left: 2px;
+    }
+    .logo-sub {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #f7931e;
+      margin-top: 2px;
+      user-select: none;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Headline & subtext area (left + right side) */
+    .main-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: space-between;
+      margin-bottom: 40px;
+    }
+    .main-left {
+      flex: 1 1 58%;
+      min-width: 280px;
+    }
+    .main-right {
+      flex: 1 1 38%;
+      min-width: 280px;
+      background: #f9fafb;
+      border-radius: 8px;
+      padding: 20px 24px 30px;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 0.07);
+      align-self: start;
+    }
+
+    /* Heading & subheading */
+    h1 {
+      font-weight: 600;
+      margin: 0;
+      font-size: 1.8rem;
+      line-height: 1.2;
+      margin-bottom: 8px;
+      color: #121725;
+    }
+    p.lead {
+      font-weight: 400;
+      font-size: 1rem;
+      color: #404a5c;
+      margin-top: 0;
+      margin-bottom: 22px;
+    }
+
+    /* Bonus info box */
+    .bonus-box {
+      background-color: #e9f0ff;
+      border-radius: 8px;
+      padding: 18px 22px;
+      font-size: 0.93rem;
+      color: #404a5c;
+      box-shadow: inset 0 1px 4px rgb(0 0 0 / 0.06);
+      margin-bottom: 26px;
+      line-height: 1.3;
+      user-select: none;
+    }
+    .bonus-emojis {
+      font-weight: 700;
+      margin-right: 6px;
+      font-size: 1.22rem;
+      vertical-align: middle;
+    }
+    .bonus-bold {
+      font-weight: 700;
+      color: #121725;
+    }
+    .bonus-list {
+      padding-left: 20px;
+      margin: 10px 0 8px;
+    }
+    .bonus-list li {
+      margin-bottom: 6px;
+    }
+    .bonus-italic {
+      font-style: italic;
+      color: #6a7280;
+    }
+    .btn-download {
+      background: #f15a24;
+      border: none;
+      color: #fff;
+      font-weight: 700;
+      padding: 10px 18px;
+      font-size: 0.875rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.25s ease;
+      user-select: none;
+      display: inline-block;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    .btn-download:hover,
+    .btn-download:focus {
+      background: #d04e20;
+      outline: none;
+    }
+
+    /* Form right panel */
+    .form-title {
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 14px;
+      color: #121725;
+    }
+    form input[type="text"],
+    form input[type="email"],
+    form input[type="tel"],
+    form input[type="number"] {
+      width: 100%;
+      border-radius: 6px;
+      border: 1.5px solid #d1d5db;
+      padding: 10px 12px;
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+      font-family: inherit;
+      transition: border-color 0.2s ease;
+    }
+    form input[type="text"]:focus,
+    form input[type="email"]:focus,
+    form input[type="tel"]:focus,
+    form input[type="number"]:focus {
+      outline: none;
+      border-color: #03a9f4;
+      box-shadow: 0 0 5px #03a9f4aa;
+    }
+    .btn-submit {
+      background: #f15a24;
+      border: none;
+      color: #fff;
+      font-weight: 700;
+      padding: 12px 16px;
+      font-size: 0.9rem;
+      border-radius: 6px;
+      width: 100%;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      transition: background-color 0.25s ease;
+      user-select: none;
+      margin-top: 8px;
+    }
+    .btn-submit:hover,
+    .btn-submit:focus {
+      background: #d04e20;
+      outline: none;
+    }
+
+    /* Testimonials */
+    .testimonials {
+      max-width: 680px;
+      margin: 0 auto 40px auto;
+      padding: 0 15px;
+      font-style: italic;
+      font-size: 1rem;
+      color: #404a5c;
+      line-height: 1.4;
+      user-select: none;
+    }
+    .testimonials p {
+      margin-bottom: 12px;
+    }
+    .testimonial-highlight {
+      font-weight: 700;
+      color: #121725;
+    }
+
+    /* Why choose section */
+    .why-choose-section {
+      max-width: 1024px;
+      margin: 0 auto 36px auto;
+      text-align: center;
+      padding: 0 12px;
+    }
+    .why-choose-section h2 {
+      font-weight: 600;
+      margin-bottom: 22px;
+      font-size: 1.6rem;
+      color: #121725;
+      user-select: none;
+    }
+    .benefits-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px 22px;
+    }
+    .benefit {
+      background: #f3f4f6;
+      border-radius: 8px;
+      flex: 1 1 190px;
+      max-width: 220px;
+      padding: 14px 18px;
+      font-size: 0.9rem;
+      color: #404a5c;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      user-select: none;
+    }
+    .benefit svg {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      stroke-width: 1.8;
+      stroke-linejoin: round;
+      stroke-linecap: round;
+    }
+    .benefit .text {
+      flex-grow: 1;
+      text-align: left;
+    }
+
+    /* Bottom call to action */
+    .bottom-cta {
+      background-color: #fff5f1;
+      text-align: center;
+      padding: 36px 20px;
+      user-select: none;
+    }
+    .bottom-cta h3 {
+      font-weight: 600;
+      font-size: 1.4rem;
+      max-width: 720px;
+      margin: 0 auto 25px auto;
+      color: #121725;
+      line-height: 1.3;
+    }
+    .btn-bottom-cta {
+      background: #f15a24;
+      border: none;
+      color: #fff;
+      font-weight: 700;
+      padding: 12px 24px;
+      font-size: 0.9rem;
+      border-radius: 6px;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      transition: background-color 0.25s ease;
+      user-select: none;
+      user-drag: none;
+    }
+    .btn-bottom-cta:hover,
+    .btn-bottom-cta:focus {
+      background: #d04e20;
+      outline: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .main-section {
+        flex-direction: column;
+      }
+      .main-left,
+      .main-right {
+        flex: 1 1 100%;
+        min-width: 100%;
+      }
+      .benefits-row {
+        justify-content: center;
+      }
+      .benefit {
+        max-width: 260px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" role="main">
+    <header>
+      <div class="logo" aria-label="OneInsure">
+        <span class="one">One</span><span class="insure">Insure</span>
+      </div>
+      <div class="logo-sub">India ki insurance helpline</div>
+    </header>
+
+    <section class="main-section">
+      <article class="main-left">
+        <h1>Protect Your Family’s Health Without Breaking The Bank</h1>
+        <p class="lead">Compare top IRDAI-approved health insurance plans in under 60 seconds – No paperwork, no confusion.</p>
+        <div class="bonus-box" aria-label="Free bonus guide">
+          <span class="bonus-emojis" aria-hidden="true">🎁</span>
+          <strong class="bonus-bold">FREE Bonus:</strong>
+          <strong>“2025 Guide to Choosing Best Health Insurance in India”</strong>
+          <ul class="bonus-list">
+            <li>Learn how to avoid hidden clauses</li>
+            <li>Save ₹15,000/year in premiums</li>
+            <li>Checklist to choose the right plan for your family</li>
+          </ul>
+          <p class="bonus-italic">Sent <em>immediately</em> after sign-up!</p>
+          <button class="btn-download" type="button" aria-label="Download free guide">Download Free Guide</button>
+        </div>
+      </article>
+
+      <aside class="main-right" aria-label="Comparison form">
+        <form action="#" method="POST" novalidate>
+          <div class="form-title">[FREE Tool] Compare Plans in 60 Seconds</div>
+          <input type="text" name="name" placeholder="Name" aria-label="Name" required />
+          <input type="email" name="email" placeholder="Email" aria-label="Email" required />
+          <input type="tel" name="mobile" placeholder="Mobile" aria-label="Mobile" pattern="[0-9\s\-+]{7,15}" required />
+          <input type="number" name="age" placeholder="Age" aria-label="Age" min="0" max="120" required />
+          <input type="text" name="city" placeholder="City" aria-label="City" required />
+          <button class="btn-submit" type="submit" aria-label="Get my free comparison now">Get My Free Comparison Now</button>
+        </form>
+      </aside>
+    </section>
+
+    <section class="testimonials" aria-label="Testimonials">
+      <p>“OneInsure helped me find the perfect plan for my parents. Super quick and transparent.”<br/><strong class="testimonial-highlight">– Megha R., Pune</strong></p>
+      <p>“No spam calls. Just straight help. Loved it.”<br/><strong class="testimonial-highlight">– Ravi S., Bengaluru</strong></p>
+    </section>
+
+    <section class="why-choose-section" aria-label="Why Choose OneInsure">
+      <h2>Why Choose OneInsure</h2>
+      <div class="benefits-row">
+        <div class="benefit">
+          <svg aria-hidden="true" fill="none" stroke="#2e7d32" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"></path></svg>
+          <div class="text">Instant Quotes from multiple insurers</div>
+        </div>
+        <div class="benefit">
+          <svg aria-hidden="true" fill="none" stroke="#b71c1c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M18 8a6 6 0 1 1-12 0 6 6 0 0 1 12 0z"/><path d="M2 20h20"/></svg>
+          <div class="text">Expert Guidance from licensed advisors</div>
+        </div>
+        <div class="benefit">
+          <svg aria-hidden="true" fill="none" stroke="#6a1b9a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2" ry="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <div class="text">1-Minute Process – 100% paperless</div>
+        </div>
+        <div class="benefit">
+          <svg aria-hidden="true" fill="none" stroke="#757575" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+          <div class="text">No Jargon – Easy to understand comparisons</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bottom-cta" aria-label="Call to action">
+      <h3>Don’t Wait – Your Free Comparison Report Is One Click Away</h3>
+      <button class="btn-bottom-cta" type="button" aria-label="Compare my plans now">Compare My Plans Now</button>
+    </section>
+  </div>
+</body>
+</html>
